@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JogoTV</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/estiloReproductor.css')}}">
+
+  </head>
+<body style="background-color: {{colorFondo}}">
+    
+    <div id="gif-cargando"><img src="{{url_for('static', filename="cargando.gif")}}"></div>
+    <script>
+        setTimeout(function(){
+            document.getElementById("gif-cargando").style.display = 'none';
+            }, 1200);
+    </script>
+    
+
+    <header>
+        <img id="boton-ajustes" src="{{url_for('static', filename='boton-ajustes.png')}}" alt="Boton de Ajustes">
+        <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
+        <img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback">
+    </header>
+
+    <div id="tele-botones-container">
+        <div id="tele">
+            <div id="tele-marco">
+                <img id="tele-marco-img" src="{{url_for('static', filename='tele-marco.png')}}">
+                <div id="video">
+                    <div id="player"></div>
+                </div>
+                <div id="controles-video">
+                    <img id="btnSiguiente" src="{{url_for('static', filename='boton-aleatorio.png')}}" alt="">
+                    <img id="btnPlayPausa" src="{{url_for('static', filename='boton-playpausa.png')}}" alt="">
+                    <img id="btnVolumen" src="{{url_for('static', filename='boton-volumen.png')}}" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="controles">
+            <!--Cambiar tarjeta automáticamente-->
+            <img id="tarjeta-categoria" src="{{url_for('static', filename=tarjeta)}}" alt="Tarjeta de Categoría actual">
+            <a href="{{url_for('inicio')}}"><img id="btnInicio" src="{{url_for('static', filename='boton-home.png')}}" alt="Boton Inicio"></a>
+            <img id="btnFavoritos" src="{{url_for('static', filename='boton-favoritos.png')}}" alt="Boton Favoritos">
+            <button type="button" id="btnFlush">Borrar mis Favoritos e Historia</button>
+        </div>
+    </div>
+
+    <script>
+        console.log("start");
+
+        // Saber si estoy en favoritos
+        urlActual = window.location.href;
+        var esFavoritos = null;
+        if(urlActual.includes("favoritos")){
+            esFavoritos = true;
+        }
+        else{
+            // Categoria normal, cargar playlist
+            var playlist = "{{ playlistURL }}";
+            esFavoritos = false;
+        }
+
+        console.log(esFavoritos);
+
+
+        // Copiado de Youtube
+
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '390',
+            width: '640',
+            playerVars: {
+            'playsinline': 1,
+            'autoplay': 1,
+            'controls': 0,
+            'listType':'playlist',
+            'list': playlist
+            },
+            events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+            }
+        });
+        }
+
+        var indiceFavoritos = null;
+        var favoritos = null;
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            event.target.playVideo();
+            // Si estoy en favoritos cargar video de favoritos de localStorage
+            if (esFavoritos){
+                // Acceder a Array con favoritos del Usuario en localStorage o crear
+                favoritos = localStorage.getItem('favoritos');
+                if ( favoritos == null){
+                    window.alert("Aún no has guardado ningún favorito... :c");
+                    document.location.href = '/';
+                }
+                else{
+                    //Si ya esta guardado como string, se hace JSON para trabajar con el
+                    favoritos = JSON.parse(favoritos);
+                    console.log(favoritos);
+                    primerVideoCode = favoritos[0];
+                    console.log(primerVideoCode);
+                    player.loadVideoById({videoId:primerVideoCode});
+                    indiceFavoritos = 0;
+                }
+            }
+        }
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+        function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            done = true;
+        }
+        }
+
+        // Propio
+
+        document.getElementById("btnVolumen").addEventListener("click", function(){
+            if (player.isMuted()){
+                player.unMute();
+                player.setVolume(100);
+            }
+            else {
+                player.mute();
+        }
+
+        document.getElementById("btnVolumen").style.transform = "rotate(45deg)";
+        setTimeout(function(){
+            document.getElementById("btnVolumen").style.transform = "rotate(0deg)";
+        }, 500);        
+        });
+        
+        document.getElementById("btnPlayPausa").addEventListener("click", function(){
+        let state = player.getPlayerState()
+        if (state == -1){
+            player.playVideo();
+        }
+        else if (state == 1){
+            player.pauseVideo()
+        }
+        else if (state == 2){
+            player.playVideo()
+        }
+
+        document.getElementById("btnPlayPausa").style.transform = "rotate(45deg)";
+            setTimeout(function(){
+                document.getElementById("btnPlayPausa").style.transform = "rotate(0deg)";
+            }, 500);
+        });
+        document.getElementById("btnSiguiente").addEventListener("click", function(){
+            if(!esFavoritos){player.nextVideo()}
+            else{
+                indiceFavoritos++;
+                if(indiceFavoritos < favoritos.length){
+                    console.log(favoritos);                
+                    let siguienteVideo = favoritos[indiceFavoritos];
+                    player.loadVideoById({videoId:siguienteVideo});
+                    player.playVideo();
+                }
+                else{
+                    window.alert("¡Agrega más videos a tus favoritos!")
+                }
+            };
+
+            document.getElementById("btnSiguiente").style.transform = "rotate(45deg)";
+            setTimeout(function(){
+                document.getElementById("btnSiguiente").style.transform = "rotate(0deg)";
+            }, 500);
+        });
+
+        document.getElementById("btnFavoritos").addEventListener("click", function(event){
+            
+            if (!esFavoritos){
+                // Extraer codigo de video actual favorito
+                videoURL = player.getVideoUrl();
+                console.log(videoURL)
+                videoCode = videoURL.substring(videoURL.indexOf("&v=") + 3);
+                console.log(videoCode)
+                
+                // Acceder a Array con favoritos del Usuario en localStorage o crear
+                let favoritos = localStorage.getItem('favoritos');
+                if ( favoritos == null){
+                    favoritos = [];
+                }
+                else{
+                    //Si ya esta guardado como string, se hace JSON para trabajar con el
+                    favoritos = JSON.parse(favoritos);
+                }
+
+                console.log(favoritos);
+
+                // revisar si ya existe el video en favoritos
+                nuevo = true;
+                for (let i = 0; i < favoritos.length; i++) {
+                    if(favoritos[i] === videoCode){
+                        nuevo = false;
+                        break;
+                    }
+                }
+                // If nuevo, guardar el video
+                if(nuevo){favoritos.push(videoCode);}
+
+
+                console.log(favoritos);
+
+                // Guardar en localStorage todo el array como JSON
+                localStorage.setItem("favoritos", JSON.stringify(favoritos));
+                
+                var likeAudio = new Audio("{{url_for('static', filename="like.mp3")}}");
+                likeAudio.play();
+            }
+        });
+
+        // FOR TESTING
+        document.getElementById("btnFlush").addEventListener("click", function(){
+            window.localStorage.clear();
+            console.log("Clear!")
+        });
+
+
+    </script>
+
+</body>
+</html>

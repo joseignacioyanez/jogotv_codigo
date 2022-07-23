@@ -4,26 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JogoTV</title>
-    <style>
-        body, html {
-            height: 100%;
-        }
 
-        .bg {
-            /* The image used */
-            background-image: url("img_girl.jpg");
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-            /* Full height */
-            height: 100%;
-
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/estiloInicio.css')}}">
 </head>
 <body>
-    <img src="/static/images/inicio.jpg" id="bg">
+
+    <div id="gif-inicio"><img src="{{url_for('static', filename="inicio.gif")}}"></div>
+    <script>
+        setTimeout(function(){
+            document.getElementById("gif-inicio").style.display = 'none';
+            }, 1200);
+    </script>
+
+    <header>
+        <img id="boton-ajustes" src="{{url_for('static', filename='boton-ajustes.png')}}" alt="Boton de Ajustes">
+        <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
+        <img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback">
+    </header>
+
+    
+    <div id="grupo-categorias">
+        <ul class="fila-tarjetas-categorias">
+            <li class="tarjeta"><a href="{{url_for('favoritos')}}"><img src="{{url_for('static', filename='tarjeta-favoritos.png')}}" alt="Tarjeta de Categoría Favoritos"></a></li>
+            <li class="tarjeta"><a href="{{url_for('ciencia')}}"><img src="{{url_for('static', filename='tarjeta-ciencia.png')}}" alt="Tarjeta de Categoría Ciencia"></a></li>
+            <li class="tarjeta"><a href="{{url_for('historia')}}"><img src="{{url_for('static', filename='tarjeta-historia.png')}}" alt="Tarjeta de Categoría Favoritos"></a></li>
+        </ul>
+        <ul class="fila-tarjetas-categorias">
+            <li class="tarjeta"><a href="{{url_for('deportes')}}"><img src="{{url_for('static', filename='tarjeta-deportes.png')}}" alt="Tarjeta de Categoría Favoritos"></a></li>
+            <li class="tarjeta"><a href="{{url_for('arte')}}"><img src="{{url_for('static', filename='tarjeta-arte.png')}}" alt="Tarjeta de Categoría Favoritos"></a></li>
+            <li class="tarjeta"><a href="{{url_for('entretenimiento')}}"><img src="{{url_for('static', filename='tarjeta-entretenimiento.png')}}" alt="Tarjeta de Categoría Favoritos"></a></li>
+        </ul>
+    </div>
+
+    <script>
+        var reproducido = false
+        document.getElementsByTagName("body")[0].addEventListener("click", function(){
+            if(!reproducido){
+                var menuAudio = new Audio("{{url_for('static', filename="menu-principal.mp3")}}");
+                menuAudio.play();
+                reproducido = true;
+            }
+        });
+    </script>
+
 </body>
 </html>

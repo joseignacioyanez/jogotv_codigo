@@ -1,0 +1,61 @@
+body {
+    background-image: url(../fondoColores.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.fila-tarjetas-categorias {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 50px;
+    margin-bottom: 100px;
+}
+grupo-categorias{
+    display: flex;
+    align-items: center;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.tarjeta:hover{
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 1s;
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+#logo:hover, #boton-ajustes:hover, #boton-feedback:hover{
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  
+  #gif-inicio > img{
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -1vw;
+    max-width: 100vw;
+    width:100vw;
+    z-index: 1200;
+  }

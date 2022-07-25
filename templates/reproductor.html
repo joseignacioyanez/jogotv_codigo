@@ -45,7 +45,7 @@
             <img id="tarjeta-categoria" src="{{url_for('static', filename=tarjeta)}}" alt="Tarjeta de Categoría actual">
             <a href="{{url_for('inicio')}}"><img id="btnInicio" src="{{url_for('static', filename='boton-home.png')}}" alt="Boton Inicio"></a>
             <img id="btnFavoritos" src="{{url_for('static', filename='boton-favoritos.png')}}" alt="Boton Favoritos">
-            <button type="button" id="btnFlush">Borrar mis Favoritos e Historia</button>
+            <!--<button type="button" id="btnFlush">Borrar mis Favoritos e Historia</button>-->
         </div>
     </div>
 
@@ -241,11 +241,11 @@
             }
         });
 
-        // FOR TESTING
+        //FOR TESTING
         document.getElementById("btnFlush").addEventListener("click", function(){
             window.localStorage.clear();
             console.log("Clear!")
-        });
+        }); 
 
 
     </script>

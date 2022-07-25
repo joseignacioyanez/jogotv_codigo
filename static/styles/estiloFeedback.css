@@ -1,0 +1,106 @@
+body {
+    background-color: #FFE062;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+#cuadro-gris{
+    height: 40vw;
+    width: 43vw;
+    background-color: darkgray;
+    margin-top: 2vw;
+    position: relative;
+    border-radius: 50px;
+}
+#cuadro-blanco{
+    height: 38vw;
+    width: 40vw;
+    background-color: white;
+    border-radius: 120px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#estrellas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+#controles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+#controles img {
+    margin-top: 25px;
+}
+#boton-calificanos{
+    width: 18vw;
+}
+#btnInicio{
+    width: 6vw;
+}
+#te-gusta{
+    width: 22vw;
+}
+#demuestra{
+    width: 18vw;
+}
+
+#logo:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+#estrellas > img:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  #gif-feedback > img{
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: -1vw;
+    max-width: 100vw;
+    width:100vw;
+    z-index: 1200;
+  }

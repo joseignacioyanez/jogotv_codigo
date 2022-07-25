@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback JogoTV</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/estiloFeedback.css')}}">
+</head>
+<body>
+    <div id="gif-feedback" style="display:none;"><img src="{{url_for('static', filename="feedback.gif")}}"></div>
+
+    <header>
+        <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
+    </header>
+
+    <div id="contenedor">
+        <div id="cuadro-gris">
+            <div id="cuadro-blanco">
+                <img src="{{url_for('static', filename='te-gusta-jogotv.png')}}" alt="" id="te-gusta">
+                
+                <div id="estrellas">
+                    <img src="{{url_for('static', filename='estrella-vacia.png')}}" alt="" id="estrella1">
+                    <img src="{{url_for('static', filename='estrella-vacia.png')}}" alt="" id="estrella2">
+                    <img src="{{url_for('static', filename='estrella-vacia.png')}}" alt="" id="estrella3">
+                    <img src="{{url_for('static', filename='estrella-vacia.png')}}" alt="" id="estrella4">
+                    <img src="{{url_for('static', filename='estrella-vacia.png')}}" alt="" id="estrella5">
+                </div>
+
+                <img src="{{url_for('static', filename='demuestra.png')}}" alt="" id="demuestra">
+        
+                <div id="controles">
+                    <a href="#"><img src="{{url_for('static', filename='calificanos.png')}}" alt="" id="boton-calificanos"></a>
+                    <a href="{{url_for('inicio')}}"><img id="btnInicio" src="{{url_for('static', filename='boton-home.png')}}" alt="Boton Inicio"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Audio Feedback
+        var reproducido = false
+        document.getElementsByTagName("body")[0].addEventListener("click", function(){
+            if(!reproducido){
+                var feedbackAudio = new Audio("{{url_for('static', filename="feedback.mp3")}}");
+                feedbackAudio.play();
+                reproducido = true;
+            }
+        });
+
+        estrella1 = document.getElementById("estrella1")
+        estrella2 = document.getElementById("estrella2")
+        estrella3 = document.getElementById("estrella3")
+        estrella4 = document.getElementById("estrella4")
+        estrella5 = document.getElementById("estrella5")
+        estrellallena = "/static/estrella-llena.png";
+        estrellavacia = "/static/estrella-vacia.png";
+
+        //Estrellas
+        //1
+        document.getElementById("estrella1").addEventListener("click", function(){
+            estrella1.src = estrellallena 
+            estrella2.src = estrellavacia 
+            estrella3.src = estrellavacia 
+            estrella4.src = estrellavacia 
+            estrella5.src = estrellavacia     
+        });
+        //2
+        document.getElementById("estrella2").addEventListener("click", function(){
+            estrella1.src = estrellallena  
+            estrella2.src = estrellallena
+            estrella3.src = estrellavacia 
+            estrella4.src = estrellavacia 
+            estrella5.src = estrellavacia 
+        });
+        //3
+        document.getElementById("estrella3").addEventListener("click", function(){
+            estrella1.src = estrellallena  
+            estrella2.src = estrellallena
+            estrella3.src = estrellallena 
+            estrella4.src = estrellavacia 
+            estrella5.src = estrellavacia 
+        });
+        //4
+        document.getElementById("estrella4").addEventListener("click", function(){
+            estrella1.src = estrellallena  
+            estrella2.src = estrellallena
+            estrella3.src = estrellallena 
+            estrella4.src = estrellallena 
+            estrella5.src = estrellavacia 
+        });
+        //5
+        document.getElementById("estrella5").addEventListener("click", function(){
+            estrella1.src = estrellallena  
+            estrella2.src = estrellallena
+            estrella3.src = estrellallena 
+            estrella4.src = estrellallena 
+            estrella5.src = estrellallena 
+        });
+
+        //Boton Enviar
+        document.getElementById("boton-calificanos").addEventListener("click", function(){
+            document.getElementById("gif-feedback").style.display= "block";
+            setTimeout(function(){
+                window.location.href = "http://34.138.32.235:5001/";
+            }, 5000);
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+body {
+    background-color: rgb(183, 188, 193);
+    font-family: 'Gloria Hallelujah', serif;
+    font-size: 20px;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#contenedor{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#contenedor > p{
+    margin-left: 25vw;
+    margin-right: 25vw;
+    font-size: 30px;
+}
+#videos{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+#video1, #video2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+#btnInicio{
+    width: 6vw;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padres JogoTV</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah">
+    <link rel="stylesheet" href="{{url_for("static", filename="styles/estiloPadres.css")}}">
+</head>
+<body>
+    <header>
+        <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
+    </header>
+    <div id="contenedor">
+        <h1>Queridos Padres...</h1>
+        <p>JogoTV es un sitio seguro para que sus hijos pequeños vean videos aptos para su edad. Pueden sentirse seguros de que los videos aquí alojados, son seleccionados cuidadosamente por nuestro equipo.</p>
+
+        <div id="videos">
+            <div id="video1">
+                <h2>Presentación de JogoTV</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/519J1zhMJAA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div id="video2">
+                <h2>Reunión en Vivo explicando JogoTV</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/YR5ql7hsEpk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <a href="{{url_for('inicio')}}"><img id="btnInicio" src="{{url_for('static', filename='boton-home.png')}}" alt="Boton Inicio"></a>
+
+    </div>
+</body>
+</html>

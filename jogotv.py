@@ -49,3 +49,10 @@ def entretenimiento():
     playlistURL = "PLVI9tQggdGtHjPkCPD5X5EsOYk1rA-gew"
     return render_template("reproductor.html", colorFondo=colorFondo, tarjeta=tarjeta, playlistURL=playlistURL)
 
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
+
+@app.route("/padres")
+def padres():
+    return render_template("padres.html")

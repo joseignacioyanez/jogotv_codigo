@@ -23,7 +23,7 @@
     <header>
         <img id="boton-ajustes" src="{{url_for('static', filename='boton-ajustes.png')}}" alt="Boton de Ajustes">
         <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
-        <img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback">
+        <a href="{{url_for('feedback')}}"><img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback"></a>
     </header>
 
     <div id="tele-botones-container">
@@ -65,6 +65,18 @@
         }
 
         console.log(esFavoritos);
+
+        // Audio Favoritos
+        if(esFavoritos){
+            var reproducido = false
+            document.getElementsByTagName("body")[0].addEventListener("click", function(){
+                if(!reproducido){
+                    var favAudio = new Audio("{{url_for('static', filename="favoritos.mp3")}}");
+                    favAudio.play();
+                    reproducido = true;
+                }
+            });
+        }
 
 
         // Copiado de Youtube

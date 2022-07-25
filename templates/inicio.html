@@ -17,11 +17,12 @@
             document.getElementById("gif-inicio").style.display = 'none';
             }, 1200);
     </script>
+    <div id="gif-primera-vez" style="display:none;"><img src="{{url_for('static', filename="intro-jogotv.gif")}}"></div>
 
     <header>
-        <img id="boton-ajustes" src="{{url_for('static', filename='boton-ajustes.png')}}" alt="Boton de Ajustes">
+        <a href="{{url_for('padres')}}"><img id="boton-padres" src="{{url_for('static', filename='padres.png')}}" alt="Boton de Padres"></a>
         <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
-        <img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback">
+        <a href="{{url_for('feedback')}}"><img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback"></a>
     </header>
 
     
@@ -47,6 +48,19 @@
                 reproducido = true;
             }
         });
+
+        //Animacion Primera vez
+
+        antiguoUsuario = localStorage.getItem("antiguoUsuario");
+
+        if (antiguoUsuario == null){
+            localStorage.setItem("antiguoUsuario", "true");
+            document.getElementById("gif-primera-vez").style.display = "block";
+            setTimeout(function(){
+                document.getElementById("gif-primera-vez").style.display = "none";
+            }, 7000);
+        }
+
     </script>
 
 </body>

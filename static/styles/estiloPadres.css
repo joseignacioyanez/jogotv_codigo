@@ -30,9 +30,14 @@ header{
     flex-direction: column;
     justify-content: center;
     margin: 5px;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 80px;
+    margin-right: 80px;
 }
 #btnInicio{
     width: 6vw;
+}
+#btnGuiaPadres{
+    width: 10vw;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }

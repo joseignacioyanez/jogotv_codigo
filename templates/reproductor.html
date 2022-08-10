@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles/estiloReproductor.css')}}">
 
   </head>
-<body style="background-color: {{colorFondo}}">
+<body style="background-color: {{colorFondo}}" id="body">
     
     <div id="gif-cargando"><img src="{{url_for('static', filename="cargando.gif")}}"></div>
     <script>
@@ -21,7 +21,14 @@
     
 
     <header>
-        <img id="boton-ajustes" src="{{url_for('static', filename='boton-ajustes.png')}}" alt="Boton de Ajustes">
+        <input type="color" id="backColor" name="backColor" value="{{colorFondo}}">
+        
+        <script>
+            document.getElementById("backColor").addEventListener("input", function(evt){
+                document.getElementById("body").style.backgroundColor = evt.target.value;
+            })
+        </script>
+        
         <img id="logo" src="{{url_for('static', filename='JOGOTV-LOGO.png')}}" alt="Logo de JogoTV con Globos en las letras">
         <a href="{{url_for('feedback')}}"><img id="boton-feedback" src="{{url_for('static', filename='boton-feedback.png')}}" alt="Boton de Feedback"></a>
     </header>
